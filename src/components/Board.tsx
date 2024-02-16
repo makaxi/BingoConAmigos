@@ -7,17 +7,14 @@ interface DynamicGridProp {
 }
 
 const Board: React.FC<DynamicGridProp> = ({ size }) => {
-  const { grid, toggleSquare, checkWinningCondition } = useGrid(size);
+  const { grid, toggleSquare } = useGrid(size);
 
   const handleClick = (rowIndex: number, colIndex: number) => {
-    // Update grid state with new grid
     toggleSquare(rowIndex, colIndex);
-
-    checkWinningCondition();
   };
 
   return (
-    <div className="container-fluid">
+    <div className="container">
       {grid.map((row, rowIndex) => (
         <Row
           key={rowIndex}
