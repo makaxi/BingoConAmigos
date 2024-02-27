@@ -1,8 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const Square = () => {
+interface Props{
+  onClick: (row: number, col: number) => void;
+  row: number;
+  col: number;
+}
+
+const Square = ({onClick, row, col} : Props) => {
+
+  const [mark, setMark] = useState(false);
+
+  const handleClick = () => {
+    onClick(row, col);
+  }
+
   return (
-    <button>O</button>
+    <button
+      onClick={() => {
+        setMark(!mark);
+        handleClick();
+      }}
+    >
+      {mark ? "x" : "O"}
+    </button>
   )
 }
 
