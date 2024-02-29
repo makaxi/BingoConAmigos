@@ -1,29 +1,17 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 interface Props{
-  onClick: (row: number, col: number) => void;
-  row: number;
-  col: number;
+  passClickUp: () => void;
+  value: boolean;
 }
 
-const Square = ({onClick, row, col} : Props) => {
-
-  const [mark, setMark] = useState(false);
-
-  const handleClick = () => {
-    onClick(row, col);
-  }
+const Square = ({passClickUp, value} : Props) => {
 
   return (
-    <button
-      onClick={() => {
-        setMark(!mark);
-        handleClick();
-      }}
-    >
-      {mark ? "x" : "O"}
+    <button onClick={() => {passClickUp()}}>
+      {value ? "x" : "O"}
     </button>
   )
-}
+};
 
-export default Square
+export default Square;
