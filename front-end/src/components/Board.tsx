@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Square from "./Square";
+import checkBingoWinner from "../utils/checkBingoWinner";
 
 interface Props {
   size: number;
@@ -15,8 +16,10 @@ const Board = ({ size }: Props) => {
   const handleClick = ( row: number, col: number) => {
     const newBoard = [...board];
     newBoard[row][col] = !newBoard[row][col];
-    console.log("Clicked row " + row + " col " + col);
-    console.log(newBoard[row][col]);
+    //console.log("Clicked row " + row + " col " + col);
+    //console.log(newBoard[row][col]);
+    //if(checkBingoWinner(newBoard)) console.log("you won");
+    console.log(checkBingoWinner(newBoard) ? "BINGO!" : "currently no win");
     setBoard(newBoard);
   };
 
