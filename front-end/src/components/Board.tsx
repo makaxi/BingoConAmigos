@@ -8,12 +8,16 @@ interface Props {
 
 const Board = ({ size }: Props) => {
   
-  const [board, setBoard] = useState<boolean[][]>(
-    Array.from({length: size},() =>
-    Array.from({length: size}, () => false)  
-    ));
+  const [board, setBoard] = useState<boolean[][]>(() => {
+    const initialBoard = Array.from({length: size}, () =>
+      Array.from({length: size}, () => false)  
+    );
+    initialBoard[Math.floor(size/2)][Math.floor(size/2)] = true;
+    return initialBoard;
+  });
     
   const handleClick = ( row: number, col: number) => {
+    if(row === Math.floor(size/2) && col === Math.floor(size/2)) return;
     const newBoard = [...board];
     newBoard[row][col] = !newBoard[row][col];
     //console.log("Clicked row " + row + " col " + col);
@@ -31,7 +35,8 @@ const Board = ({ size }: Props) => {
             <Square 
               passClickUp={() => handleClick(rowIndex, colIndex)} 
               value={value}
-              key={colIndex} 
+              key={colIndex}
+              freeSpace={rowIndex === Math.floor(size / 2) && colIndex === Math.floor(size / 2)}
             />
           ))}
         </div>
