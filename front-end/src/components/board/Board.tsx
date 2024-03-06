@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import Square from "./Square";
-import checkBingoWinner from "../utils/checkBingoWinner";
+import Square from "../square/Square";
+import checkBingoWinner from "../../utils/checkBingoWinner";
+import './Board.css';
 
 interface Props {
   size: number;
+  activites: string[];
 }
 
-const Board = ({ size }: Props) => {
+const Board = ({ size, activites }: Props) => {
   
   const [board, setBoard] = useState<boolean[][]>(() => {
     const initialBoard = Array.from({length: size}, () =>
@@ -32,11 +34,12 @@ const Board = ({ size }: Props) => {
       {board.map((row, rowIndex) => (
         <div className="row" key={rowIndex}>
           {row.map((value, colIndex) => (
-            <Square 
-              passClickUp={() => handleClick(rowIndex, colIndex)} 
-              value={value}
-              key={colIndex}
+            <Square
+              activity={activites[rowIndex*size + colIndex]}
               freeSpace={rowIndex === Math.floor(size / 2) && colIndex === Math.floor(size / 2)}
+              value={value}
+              passClickUp={() => handleClick(rowIndex, colIndex)} 
+              key={colIndex}
             />
           ))}
         </div>

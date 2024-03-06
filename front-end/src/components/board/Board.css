@@ -1,0 +1,5 @@
+.row {
+  display: flex; /* Display squares inline */
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+}

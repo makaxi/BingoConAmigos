@@ -1,0 +1,7 @@
+.square {
+  width: 150px; /* Adjust width as needed */
+  height: 150px; /* Adjust height as needed */
+  background-color: #ccc; /* Grey background color */
+  border: 1px solid #000; /* Black border */
+  margin: 2px; /* Adjust margin as needed */
+}
