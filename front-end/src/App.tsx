@@ -1,44 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import React, { useEffect, useState } from 'react'
 import './App.css'
 import Board from './components/board/Board'
 
-const activitiesWithFriends = [
-  "Go for a hike",
-  "Have a picnic in the park",
-  "Play board games",
-  "Go bowling",
-  "Have a movie night",
-  "Host a barbecue",
-  "Go to a concert",
-  "Visit a museum",
-  "Go to the beach",
-  "Have a game night",
-  "Go on a road trip",
-  "Try a new restaurant",
-  "Go camping",
-  "Have a potluck dinner",
-  "Go to an amusement park",
-  "Play sports together",
-  "Have a karaoke night",
-  "Go to a comedy show",
-  "Attend a sporting event",
-  "Go ice skating",
-  "Have a bonfire",
-  "Go to a farmers market",
-  "Explore a new city",
-  "Go to a theme park",
-  "Sleep"
-];
-
 function App() {
-  const [count, setCount] = useState(0)
+  const [backendData, setBackendData] = useState([]);
+
+  useEffect(() => {
+    fetch("/api")
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        const { activitiesWithFriends } = data;
+        setBackendData(activitiesWithFriends);
+        //console.log(backendData);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
 
   return (
     <>
-      <Board size={5} activites={activitiesWithFriends}/>
+      { (backendData.length === 0) 
+      ? ( <p>Loading...</p>) 
+      : ( <Board size={5} activites={backendData}/> )}
     </>
-  )
+  );
 }
 
 export default App
