@@ -2,11 +2,13 @@
   "name": "back-end",
   "version": "1.0.0",
   "description": "Server for Amingos",
-  "main": "index.js",
+  "type": "module",
+  "main": "index",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index",
-    "dev": "nodemon index"
+    "build": "tsc",
+    "dev": "nodemon index",
+    "start" : "tsc && node index.js"
   },
   "author": "",
   "license": "ISC",
